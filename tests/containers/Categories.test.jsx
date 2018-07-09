@@ -4,22 +4,25 @@ import { createMockStore } from 'redux-test-utils';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
-import Category from '../../src/containers/Category';
+import Categories from '../../src/containers/Categories';
 import storeFixture from '../../src/fixtures/store';
 
 const store = createMockStore(storeFixture);
+const history = { push: () => { }, location: { pathname: '' } };
 
-const mounted = mount.bind(
-  null,
-  <Provider store={store}>
-    <MemoryRouter>
-      <Category />
-    </MemoryRouter>
-  </Provider>,
-);
-
-describe('<Category />', () => {
+describe('<Categories />', () => {
   it('should render without crashing', () => {
-    expect(mounted).not.toThrow();
+    const wrapper = mount.bind(
+      null,
+      <Provider store={store}>
+        <MemoryRouter>
+          <Categories.WrappedComponent
+            history={history}
+            requesting={false}
+          />
+        </MemoryRouter>
+      </Provider>,
+    );
+    expect(wrapper).not.toThrow();
   });
 });
