@@ -18,6 +18,8 @@ describe('<Categories />', () => {
         <MemoryRouter>
           <Categories.WrappedComponent
             history={history}
+            fetchCategories={() => {}}
+            deleteCategory={() => {}}
             requesting={false}
           />
         </MemoryRouter>
