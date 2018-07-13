@@ -3,7 +3,6 @@ import PropType from 'prop-types';
 
 import TruncateDescription from '../TruncateDescription';
 import Delete from '../svgIcons/categoryIcons/Delete';
-import Button from '../../common/Button';
 
 /**
  * @summary Renders an category card
@@ -92,15 +91,14 @@ class CategoryCard extends Component {
   renderDeleteButton() {
     return (
       <div className='deleteCategoryButtons'>
-        <Button
+        <button
           name='delete'
-          value='Delete'
           className='deleteCategory__button'
+          type='button'
           onClick={() => this.props.handleClick(this.props.id)}
         >
-          test
           <Delete />
-        </Button>
+        </button>
       </div>
     );
   }
