@@ -96,7 +96,7 @@ class CategoryCard extends Component {
           name='delete'
           value='Delete'
           className='deleteCategory__button'
-          onClick={() => this.props.handleClick(true, this.props.id)}
+          onClick={() => this.props.handleClick(this.props.id)}
         >
           test
           <Delete />

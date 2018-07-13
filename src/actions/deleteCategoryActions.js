@@ -35,10 +35,10 @@ export const deleteCategoryFailure = error => (
    * @param {Array} category - object with info on deleted category
    * @return {Object} {{type: DELETE_CATEGORY_SUCCESS, bool: bool}}
    */
-export const deleteCategorySuccess = categoryId => (
+export const deleteCategorySuccess = id => (
   {
     type: DELETE_CATEGORY_SUCCESS,
-    categoryId,
+    id,
   }
 );
 
@@ -52,8 +52,8 @@ export const deleteCategory = categoryId => (
   (dispatch) => {
     dispatch(deleteCategoryRequest());
     return axios.delete(`${config.API_BASE_URL}/activity-types/${categoryId}`)
-      .then((response) => {
-        dispatch(deleteCategorySuccess(response.data.data));
+      .then(() => {
+        dispatch(deleteCategorySuccess(categoryId));
       })
       .catch((error) => { dispatch(deleteCategoryFailure(error)); });
   }

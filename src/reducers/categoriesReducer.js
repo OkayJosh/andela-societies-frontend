@@ -68,19 +68,23 @@ const categories = (state = initialState.categories, action) => {
   case DELETE_CATEGORY_REQUEST:
     return {
       ...state,
-      requesting: true,
+      updating: true,
     };
   case DELETE_CATEGORY_FAILURE:
     return {
       ...state,
-      requesting: false,
+      updating: false,
       error: action.error,
     };
   case DELETE_CATEGORY_SUCCESS: {
-    const updatedCategories = state.categories.map(category => (
-      category.id !== action.category.id ? category : action.category
+    const updatedCategories = state.categories.filter(category => (
+      category.id !== action.id
     ));
-    return { ...state, updating: false, updatedCategories };
+    return {
+      ...state,
+      updating: false,
+      categories: updatedCategories,
+    };
   }
   default:
     return state;
