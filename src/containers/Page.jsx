@@ -84,15 +84,6 @@ class Page extends Component {
     updateSelectedItem: () => { },
   }
 
-  static getDerivedStateFromProps = (props, state) => {
-    if (props.location.pathname !== '/u/my-activities') {
-      return ({
-        showModal: props.showModal,
-      });
-    }
-    return state;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -101,6 +92,15 @@ class Page extends Component {
     props.changePageTitle(props.history.location.pathname);
   }
 
+  static getDerivedStateFromProps = (props, state) => {
+    if (props.location.pathname !== '/u/my-activities') {
+      return ({
+        showModal: props.showModal,
+      });
+    }
+    return state;
+  }
+  
   componentDidMount() {
     const token = getToken();
     const tokenInfo = decodeToken(token);
@@ -138,6 +138,20 @@ class Page extends Component {
     this.setState({ showModal: false });
   }
 
+  renderFAB = () => {
+    const { profile, location } = this.props;
+    const userRoles = Object.keys(profile.roles);
+    let FAB;
+    if (location.pathname === '/u/categories' && hasAllowedRole(userRoles, SUCCESS_OPS)) {
+      FAB = <FloatingButton onClick={this.onFabClick} />;
+    } else if (this.state.showModal || hasAllowedRole(userRoles, STAFF_USERS || userRoles.length === 0)) {
+      FAB = '';
+    } else {
+      FAB = <FloatingButton onClick={this.onFabClick} />;
+    }
+    return (FAB);
+  }
+
   renderModal = () => {
     const {
       categories,
@@ -162,6 +176,10 @@ class Page extends Component {
           updateSelectedItem={updateSelectedItem}
         />
       );
+    } else if (location.pathname === '/u/categories' &&
+      hasAllowedRole(Object.keys(profile.roles), SUCCESS_OPS)
+    ) {
+      modalContent = (<CreateCategoryForm closeModal={this.closeModal} />);
     } else if (hasAllowedRole(Object.keys(profile.roles), STAFF_USERS)) {
       modalContent = (
         <CommentsForm
@@ -169,10 +187,6 @@ class Page extends Component {
           selectedItem={selectedItem}
           deselectItem={deselectItem}
         />);
-    } else if (location.pathname === '/u/categories' &&
-      hasAllowedRole(Object.keys(profile.roles), SUCCESS_OPS)
-    ) {
-      modalContent = (<CreateCategoryForm />);
     }
     return (
       <Modal close={this.closeModal} className={className}>
@@ -214,11 +228,7 @@ class Page extends Component {
           </div>
         </main>
         {this.renderModal()}
-        {
-          this.state.showModal || hasAllowedRole(userRoles, STAFF_USERS) || userRoles.length === 0 ?
-            ''
-            : <FloatingButton onClick={this.onFabClick} />
-        }
+        {this.renderFAB()}
       </Fragment>
     );
   }

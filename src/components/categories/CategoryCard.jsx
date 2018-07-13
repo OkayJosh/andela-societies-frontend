@@ -121,7 +121,6 @@ class CategoryCard extends Component {
     const {
       name,
       description,
-      value,
       page,
       wordCount,
     } = this.props;
@@ -132,7 +131,6 @@ class CategoryCard extends Component {
           <div className='category__header'>
             <div>
               <span className='category__category'>{name}</span>
-              <span className='redemption__points'>{value}</span>
             </div>
             {page === '/u/categories' && this.renderCheckbox()}
           </div>

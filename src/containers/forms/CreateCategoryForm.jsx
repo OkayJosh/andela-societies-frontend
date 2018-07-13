@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 
 import SnackBar from '../../components/notifications/SnackBar';
 import SingleInput from '../../common/SingleInput';
-import DateField from '../../common/DateField';
-import Select from '../../common/Select';
 import Button from '../../common/Button';
 import TextArea from '../../common/TextArea';
 import FormError from '../../components/formErrors/FormError';
@@ -126,6 +124,7 @@ class CreateCategoryForm extends Component {
     return (
       <form>
         <div className='titleForm'>Create a Category</div>
+        <SingleInput type='text' name='name' title='Name' />
         <SingleInput type='number' name='value' title='Number of points' />
         <FormError errors={this.state.errors} fieldName='points' />
         <TextArea
@@ -167,7 +166,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createActivity: activity => dispatch(createActivity(activity)),
+  createActivity: activity => dispatch(createCategory(activity)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCategoryForm);
