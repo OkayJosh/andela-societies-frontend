@@ -17,8 +17,9 @@ import UpdateLoader from '../components/loaders/UpdateLoader';
 import Modal from '../common/Modal';
 import RedeemPointsForm from './forms/RedeemPointsForm';
 import CommentsForm from './forms/CommentsForm';
+import CreateCategoryForm from './forms/CreateCategoryForm';
 
-import { STAFF_USERS, SOCIETY_PRESIDENT } from '../../src/constants/roles';
+import { STAFF_USERS, SOCIETY_PRESIDENT, SUCCESS_OPS } from '../../src/constants/roles';
 
 import {
   getToken, tokenIsValid, isFellow,
@@ -168,6 +169,10 @@ class Page extends Component {
           selectedItem={selectedItem}
           deselectItem={deselectItem}
         />);
+    } else if (location.pathname === '/u/categories' &&
+      hasAllowedRole(Object.keys(profile.roles), SUCCESS_OPS)
+    ) {
+      modalContent = (<CreateCategoryForm />);
     }
     return (
       <Modal close={this.closeModal} className={className}>
