@@ -9,7 +9,8 @@ import LinearLayout from '../containers/LinearLayout';
 import Stats from '../components/sidebar/Stats';
 import stats from '../fixtures/stats';
 
-import { fetchCategories, deleteCategory } from '../actions/categoriesActions';
+import { fetchCategories } from '../actions/categoriesActions';
+import { deleteCategory } from '../actions/deleteCategoryActions';
 import SnackBar from '../components/notifications/SnackBar';
 
 
@@ -32,7 +33,6 @@ class Categories extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
       isSelectAllChecked: false,
       selectedCategories: [],
     };
@@ -53,8 +53,8 @@ class Categories extends Component {
    * @returns {void}
    */
   handleSelectAllClick = () => {
-    const { isSelectAllChecked, categories } = this.state;
-    const selectedCategories = categories.filter(category =>
+    const { isSelectAllChecked } = this.state;
+    const selectedCategories = this.props.categories.filter(category =>
       (!isSelectAllChecked && category.id)).map(category => category.id);
     this.setState({ isSelectAllChecked: !isSelectAllChecked, selectedCategories });
   }
@@ -76,7 +76,7 @@ class Categories extends Component {
    * @summary handles calling the action to delete selected categories
    * @returns void
    */
-  handleDeleteAll = () => {
+  handleDeleteAllClick = () => {
     const { selectedCategories } = this.state;
     if (!selectedCategories.length) {
       this.setState({
@@ -143,6 +143,7 @@ class Categories extends Component {
       snackBarMessage = <SnackBar message={message} />;
     }
     const hideFilter = true;
+    const showSelectAllDeleteBtn = true;
 
     return (
       <Page>
@@ -151,6 +152,9 @@ class Categories extends Component {
             <PageHeader
               title='Categories'
               hideFilter={hideFilter}
+              showSelectAllDeleteBtn={showSelectAllDeleteBtn}
+              handleSelectAllClick={this.handleSelectAllClick}
+              handleApproveAllClick={this.handleDeleteAllClick}
             />
             <div className='categories'>
               {
@@ -180,7 +184,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchCategories: () => dispatch(fetchCategories()),
-  deleteCategory: activityId => dispatch(deleteCategory(activityId)),
+  deleteCategory: categoryId => dispatch(deleteCategory(categoryId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

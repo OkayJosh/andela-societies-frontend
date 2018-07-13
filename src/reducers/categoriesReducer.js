@@ -41,19 +41,29 @@ const categories = (state = initialState.categories, action) => {
   case CREATE_CATEGORY_REQUEST:
     return {
       ...state,
-      requesting: true,
+      message: {
+        type: 'info',
+        text: 'Sending ...',
+      },
     };
   case CREATE_CATEGORY_FAILURE:
     return {
       ...state,
-      requesting: false,
       error: action.error,
+      message: {
+        type: 'error',
+        text: action.error.response ? action.error.response.data.message : 'An error has occurred',
+      },
     };
   case CREATE_CATEGORY_SUCCESS: {
-    const updatedCategories = state.categories.map(category => (
-      category.id !== action.category.id ? category : action.category
-    ));
-    return { ...state, updating: false, updatedCategories };
+    return {
+      ...state,
+      categories: [action.category].concat(state.categories),
+      message: {
+        type: 'success',
+        text: 'Category Created Successfully',
+      },
+    };
   }
   case DELETE_CATEGORY_REQUEST:
     return {

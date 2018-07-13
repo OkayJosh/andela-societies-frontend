@@ -18,6 +18,7 @@ const props = {
   handleApproveAllClick: () => {},
   handleSelectAllClick: () => {},
   showSelectAllApproveBtn: false,
+  showSelectAllDeleteBtn: false,
 };
 
 const status = {

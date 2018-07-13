@@ -32,6 +32,7 @@ class PageHeader extends Component {
     selectedSociety: PropType.string,
     hideFilter: PropType.bool,
     showSelectAllApproveBtn: PropType.bool,
+    showSelectAllDeleteBtn: PropType.bool,
     tabs: PropType.arrayOf(PropType.string),
     statuses: PropType.arrayOf(PropType.string),
     showTabs: PropType.bool,
@@ -53,6 +54,7 @@ class PageHeader extends Component {
     selectedSociety: 'istelle',
     filterActivities: null,
     hideFilter: false,
+    showSelectAllDeleteBtn: false,
     showSelectAllApproveBtn: false,
     showTabs: false,
     tabs: [],
@@ -106,7 +108,7 @@ class PageHeader extends Component {
   };
 
   renderSelectAllApprovebtn = () => (
-    <div className='pageHeader__selectApprove'>
+    <div className='pageHeader__selectAction'>
       <input
         type='checkbox'
         name='checkbox'
@@ -116,7 +118,24 @@ class PageHeader extends Component {
       <Button
         name='approveAll'
         value='Approve Selected'
-        className='pageHeader__selectApprove__button'
+        className='pageHeader__selectAction__button pageHeader__selectApprove__button '
+        onClick={this.props.handleApproveAllClick}
+      />
+    </div>
+  )
+
+  renderSelectAllDeletebtn = () => (
+    <div className='pageHeader__selectAction'>
+      <input
+        type='checkbox'
+        name='checkbox'
+        className='pageHeader__selectApprove__checkbox'
+        onChange={this.props.handleSelectAllClick}
+      /> Select all
+      <Button
+        name='deleteAll'
+        value='Delete Selected'
+        className='pageHeader__selectAction__button pageHeader__selectDelete__button'
         onClick={this.props.handleApproveAllClick}
       />
     </div>
@@ -186,6 +205,7 @@ class PageHeader extends Component {
             <Fragment>
               <h1 className='pageTitle'>{title}</h1>
               {this.props.showSelectAllApproveBtn && this.renderSelectAllApprovebtn()}
+              {this.props.showSelectAllDeleteBtn && this.renderSelectAllDeletebtn()}
             </Fragment>
         }
         {
