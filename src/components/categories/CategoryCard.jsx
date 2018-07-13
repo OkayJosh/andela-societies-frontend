@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropType from 'prop-types';
 
 import TruncateDescription from '../TruncateDescription';
+import Delete from '../svgIcons/categoryIcons/Delete';
 import Button from '../../common/Button';
 
 /**
@@ -96,7 +97,10 @@ class CategoryCard extends Component {
           value='Delete'
           className='deleteCategory__button'
           onClick={() => this.props.handleClick(true, this.props.id)}
-        />
+        >
+          test
+          <Delete />
+        </Button>
       </div>
     );
   }
@@ -108,7 +112,7 @@ class CategoryCard extends Component {
         <span className='category__pointsCount'>
           {value}
         </span>
-        value
+        points
       </span>
     );
   }
