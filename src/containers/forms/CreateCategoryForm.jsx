@@ -124,8 +124,26 @@ class CreateCategoryForm extends Component {
     return (
       <form>
         <div className='titleForm'>Create a Category</div>
-        <SingleInput type='text' name='name' title='Name' />
-        <SingleInput type='number' name='value' title='Number of points' />
+        <SingleInput
+          type='text'
+          name='name'
+          title='Name'
+          value={this.state.name}
+          handleChange={this.handleChange}
+        />
+        <span className='validate__errors'>
+          {this.renderValidationError('name')}
+        </span>
+        <SingleInput
+          type='number'
+          name='value'
+          value={this.state.value}
+          title='Number of points'
+          handleChange={this.handleChange}
+        />
+        <span className='validate__errors'>
+          {this.renderValidationError('value')}
+        </span>
         <FormError errors={this.state.errors} fieldName='points' />
         <TextArea
           title='Description'
@@ -142,7 +160,7 @@ class CreateCategoryForm extends Component {
         <div>
           <Button
             name='fellowButtonSubmit'
-            value='Log'
+            value='Create'
             className={`submitButton ${message && message.type === 'info' ? 'submitButton--disabled' : ''}`}
             onClick={this.handleAddEvent}
           />
@@ -162,11 +180,11 @@ class CreateCategoryForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  message: state.myActivities.message,
+  message: state.categories.message,
 });
 
 const mapDispatchToProps = dispatch => ({
-  createActivity: activity => dispatch(createCategory(activity)),
+  createCategory: category => dispatch(createCategory(category)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCategoryForm);

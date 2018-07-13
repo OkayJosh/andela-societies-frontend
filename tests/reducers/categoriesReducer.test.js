@@ -25,6 +25,7 @@ describe('categoriesReducer', () => {
       requesting: true,
       categories: store.categories.categories,
       error: {},
+      message: null,
     });
   });
 
@@ -36,6 +37,7 @@ describe('categoriesReducer', () => {
       requesting: false,
       error: { error: 404 },
       categories: [],
+      message: null,
     });
   });
 
@@ -47,6 +49,7 @@ describe('categoriesReducer', () => {
       requesting: false,
       error: {},
       categories,
+      message: null,
     });
   });
 });

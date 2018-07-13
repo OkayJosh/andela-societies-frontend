@@ -122,7 +122,7 @@ class Categories extends Component {
               isSelectAllChecked={isSelectAllChecked}
               selectedCategories={selectedCategories}
               handleDeselectCategory={this.handleDeselectCategory}
-              wordCount={50}
+              wordCount={70}
             />);
           })
         }

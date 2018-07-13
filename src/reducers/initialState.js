@@ -22,6 +22,7 @@ const initialState = {
     requesting: false,
     categories: [],
     error: {},
+    message: null,
   },
   societyActivities: {
     activities: [],
