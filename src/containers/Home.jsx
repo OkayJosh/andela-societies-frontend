@@ -34,6 +34,14 @@ class Home extends Component {
     history: {},
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      profile: null,
+    };
+  }
+
   /**
    * @name getDerivedStateFromProps
    * @summary react life cycle to update state with prop values
@@ -42,14 +50,6 @@ class Home extends Component {
   static getDerivedStateFromProps = props => ({
     profile: props.profile,
   });
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      profile: null,
-    };
-  }
 
   /**
    * @name componentDidMount

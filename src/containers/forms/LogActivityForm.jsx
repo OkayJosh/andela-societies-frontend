@@ -30,23 +30,6 @@ class LogActivityForm extends Component {
     createActivity: PropTypes.func.isRequired,
   };
 
-  static getDerivedStateFromProps = (nextProps) => {
-    // clear form fields if activity was logged successfully
-    if (nextProps.message && nextProps.message.type === 'success') {
-      return {
-        activityTypeId: '',
-        numberOf: '',
-        date: '',
-        description: '',
-        errors: [],
-        message: nextProps.message,
-      };
-    }
-    return {
-      message: nextProps.message,
-    };
-  };
-
   /**
    * LogActivityForm component class constructor
    * @param {Object} props - actvity categories
@@ -63,6 +46,21 @@ class LogActivityForm extends Component {
     };
   }
 
+  static getDerivedStateFromProps = (nextProps) => {
+    // clear form fields if activity was logged successfully
+    if (nextProps.message && nextProps.message.type === 'success') {
+      return {
+        activityTypeId: '',
+        date: '',
+        description: '',
+        errors: [],
+        message: nextProps.message,
+      };
+    }
+    return {
+      message: nextProps.message,
+    };
+  };
   /**
    * @name setLabel
    * @summary gets the appropriate label from the labels object

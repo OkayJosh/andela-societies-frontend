@@ -26,6 +26,20 @@ class CreateCategoryForm extends Component {
     createCategory: PropTypes.func.isRequired,
   };
 
+  /**
+   * CreateCategoryForm component class constructor
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+      name: '',
+      description: '',
+      errors: [],
+      message: null,
+    };
+  }
+
   static getDerivedStateFromProps = (nextProps) => {
     // clear form fields if category was created successfully
     if (nextProps.message && nextProps.message.type === 'success') {
@@ -41,21 +55,6 @@ class CreateCategoryForm extends Component {
       message: nextProps.message,
     };
   };
-
-  /**
-   * CreateCategoryForm component class constructor
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-      name: '',
-      description: '',
-      errors: [],
-      message: null,
-    };
-  }
-
   /**
    * @memberOf CreateCategoryForm
    * change event handler

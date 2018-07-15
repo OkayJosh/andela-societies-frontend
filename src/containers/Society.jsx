@@ -31,20 +31,6 @@ class Society extends Component {
     }).isRequired,
   };
 
-
-  /**
-   * React component lifecycle method getDerivedStateFromProps
-   * @param {Object} nextProps - received props
-  */
-  static getDerivedStateFromProps(nextProps) {
-    const { loggedActivities } = nextProps.societyInfo.info;
-    return {
-      allActivities: loggedActivities,
-      filteredActivities: loggedActivities,
-      ...nextProps.societyInfo.info,
-    };
-  }
-
   /**
    * Society component class constructor
    * @param {*} props - society information
@@ -58,6 +44,19 @@ class Society extends Component {
       initialStatus: 'All',
       showUserDetails: true,
       ...props.societyInfo.info,
+    };
+  }
+
+  /**
+   * React component lifecycle method getDerivedStateFromProps
+   * @param {Object} nextProps - received props
+  */
+  static getDerivedStateFromProps(nextProps) {
+    const { loggedActivities } = nextProps.societyInfo.info;
+    return {
+      allActivities: loggedActivities,
+      filteredActivities: loggedActivities,
+      ...nextProps.societyInfo.info,
     };
   }
 

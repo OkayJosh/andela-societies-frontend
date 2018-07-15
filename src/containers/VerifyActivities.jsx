@@ -48,19 +48,6 @@ class VerifyActivities extends Component {
     roles: {},
   }
 
-  /**
-   * React component lifecycle method getDerivedStateFromProps
-   * @param {Object} nextProps - props
-   */
-  static getDerivedStateFromProps(nextProps) {
-    const { societyName, societyActivities } = nextProps;
-    const activities = filterActivitiesByStatus(societyActivities, 'in review');
-    return {
-      activities,
-      societyName,
-    };
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -71,6 +58,20 @@ class VerifyActivities extends Component {
       selectedActivities: [],
       showButtons: true,
       message: null,
+    };
+  }
+
+
+  /**
+   * React component lifecycle method getDerivedStateFromProps
+   * @param {Object} nextProps - props
+   */
+  static getDerivedStateFromProps(nextProps) {
+    const { societyName, societyActivities } = nextProps;
+    const activities = filterActivitiesByStatus(societyActivities, 'in review');
+    return {
+      activities,
+      societyName,
     };
   }
 

@@ -20,6 +20,13 @@ class MasonryLayout extends Component {
     items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: this.props.items,
+    };
+  }
+
   /**
    * React component lifecycle method getDerivedStateFromProps
    * @param {Object} nextProps - props
@@ -27,13 +34,6 @@ class MasonryLayout extends Component {
   static getDerivedStateFromProps(nextProps) {
     return {
       items: nextProps.items,
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: this.props.items,
     };
   }
 

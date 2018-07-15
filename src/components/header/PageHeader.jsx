@@ -66,6 +66,15 @@ class PageHeader extends Component {
     filterRedemptions: () => { },
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedStatus: 'All',
+      showFilterOptionsDropdown: false,
+      activeClass: 'filterOptions__option--active',
+    };
+  }
+
   /**
    * React component lifecycle method getDerivedStateFromProps
    * @param {Object} nextProps - props
@@ -73,15 +82,6 @@ class PageHeader extends Component {
   static getDerivedStateFromProps(nextProps) {
     return {
       selectedStatus: nextProps.selectedStatus,
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedStatus: 'All',
-      showFilterOptionsDropdown: false,
-      activeClass: 'filterOptions__option--active',
     };
   }
 

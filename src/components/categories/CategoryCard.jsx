@@ -42,6 +42,13 @@ class CategoryCard extends Component {
     handleDeselectCategory: () => {},
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isCategoryChecked: false,
+    };
+  }
+
   /**
    * @name getDerivedStateFromProps
    * @summary Lifecylce methods that updates state of iscategoryChecked if category is checked or not
@@ -52,13 +59,6 @@ class CategoryCard extends Component {
     const { selectedCategories } = nextProps;
     return {
       isCategoryChecked: selectedCategories ? selectedCategories.includes(nextProps.id) : false,
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCategoryChecked: false,
     };
   }
 

@@ -24,6 +24,14 @@ class SnackBar extends Component {
     show: true,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: props.message,
+      show: props.show,
+    };
+  }
+
   /**
    * @name getDerivedStateFromProps
    * @summary react lifecycle method to update state with message and whether to display the message
@@ -38,14 +46,6 @@ class SnackBar extends Component {
     }
     return prevState;
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: props.message,
-      show: props.show,
-    };
-  }
 
   handleClick = (event) => {
     event.preventDefault();

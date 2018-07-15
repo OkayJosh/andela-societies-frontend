@@ -12,18 +12,6 @@ import SparksIcon from '../svgIcons/societyIcons/Sparks';
  */
 class Stats extends Component {
   /**
-   * React component lifecycle method getDerivedStateFromProps
-   * @param {Object} nextProps - received props
-   */
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      title: nextProps.title,
-      page: nextProps.page,
-      stats: nextProps.stats,
-    };
-  }
-
-  /**
    * @name propTypes
    * @type {PropType}
    *
@@ -61,6 +49,18 @@ class Stats extends Component {
       title,
       stats,
       page,
+    };
+  }
+
+  /**
+   * React component lifecycle method getDerivedStateFromProps
+   * @param {Object} nextProps - received props
+   */
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      title: nextProps.title,
+      page: nextProps.page,
+      stats: nextProps.stats,
     };
   }
 

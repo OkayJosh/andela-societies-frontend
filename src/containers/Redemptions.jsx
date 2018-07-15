@@ -35,16 +35,6 @@ import exclamationIcon from '../fixtures/icons';
 
 class Redemptions extends React.Component {
   /**
-   * @name defaultProps
-   */
-  static defaultProps = {
-    societyName: '',
-    hasError: false,
-    userRoles: [],
-    requesting: false,
-  }
-
-  /**
    * @name propTypes
    */
   static propTypes = {
@@ -54,6 +44,39 @@ class Redemptions extends React.Component {
     fetchRedemption: PropTypes.func.isRequired,
     verifyRedemption: PropTypes.func.isRequired,
     userRoles: PropTypes.arrayOf(PropTypes.string),
+  }
+
+  /**
+   * @name defaultProps
+   */
+  static defaultProps = {
+    societyName: '',
+    hasError: false,
+    userRoles: [],
+    requesting: false,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      allActivities: [],
+      userCanEdit: false,
+      filteredActivities: [],
+      societyRedemptions: [],
+      selectedStatus: ALL,
+      initialStatus: ALL,
+      showUserDetails: true,
+      showLocation: true,
+      showButtons: false,
+      showMoreInfoButton: false,
+      showPoints: true,
+      showAmount: true,
+      selectedSociety: 'istelle',
+      selectedRedemption: {},
+      showTabs: false,
+      showModal: false,
+      statuses: [ALL, PENDING, REJECTED, APPROVED],
+    };
   }
 
   /**
@@ -102,29 +125,6 @@ class Redemptions extends React.Component {
       };
     }
     return { ...state, userRoles: null };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      allActivities: [],
-      userCanEdit: false,
-      filteredActivities: [],
-      societyRedemptions: [],
-      selectedStatus: ALL,
-      initialStatus: ALL,
-      showUserDetails: true,
-      showLocation: true,
-      showButtons: false,
-      showMoreInfoButton: false,
-      showPoints: true,
-      showAmount: true,
-      selectedSociety: 'istelle',
-      selectedRedemption: {},
-      showTabs: false,
-      showModal: false,
-      statuses: [ALL, PENDING, REJECTED, APPROVED],
-    };
   }
 
   /**

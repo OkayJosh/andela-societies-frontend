@@ -46,6 +46,16 @@ class MyActivities extends Component {
     requesting: false,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      allActivities: [],
+      filteredActivities: [],
+      selectedStatus: 'All',
+      initialStatus: 'All',
+    };
+  }
+
   /**
    * React component lifecycle method getDerivedStateFromProps
    * @param {Object} nextProps - props
@@ -54,16 +64,6 @@ class MyActivities extends Component {
     return {
       allActivities: nextProps.myActivities,
       filteredActivities: nextProps.myActivities,
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      allActivities: [],
-      filteredActivities: [],
-      selectedStatus: 'All',
-      initialStatus: 'All',
     };
   }
 

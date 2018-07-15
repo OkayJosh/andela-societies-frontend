@@ -23,12 +23,6 @@ import pointsToDollarConverter from '../../helpers/pointsToDollarsConverter';
 import centers from '../../fixtures/centers';
 
 class RedeemPointsForm extends Component {
-  static defaultProps = {
-    message: {},
-    selectedItem: {},
-    deselectItem: () => { },
-    updateSelectedItem: () => { },
-  };
   /**
    * @name propTypes
    */
@@ -43,6 +37,26 @@ class RedeemPointsForm extends Component {
     selectedItem: PropTypes.shape({ id: PropTypes.string }),
     deselectItem: PropTypes.func,
     updateSelectedItem: PropTypes.func,
+  }
+
+  static defaultProps = {
+    message: {},
+    selectedItem: {},
+    deselectItem: () => { },
+    updateSelectedItem: () => { },
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: '',
+      points: '',
+      reason: '',
+      dollars: '0.00',
+      errors: [],
+      formTitle: 'Redeem Points',
+      btnText: 'Redeem',
+    };
   }
 
   static getDerivedStateFromProps = (props, state) => {
@@ -64,19 +78,6 @@ class RedeemPointsForm extends Component {
       };
     }
     return state;
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      center: '',
-      points: '',
-      reason: '',
-      dollars: '0.00',
-      errors: [],
-      formTitle: 'Redeem Points',
-      btnText: 'Redeem',
-    };
   }
 
   /**

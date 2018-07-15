@@ -25,12 +25,6 @@ import { moreInfoText, rejectionText } from '../../fixtures/commentsFormText';
 import clickActions from '../../constants/clickAction';
 
 class CommentsForm extends Component {
-  static defaultProps = {
-    message: {},
-    selectedItem: {},
-    deselectItem: () => { },
-    closeModal: () => { },
-  };
   /**
    * @name propTypes
    */
@@ -45,14 +39,12 @@ class CommentsForm extends Component {
     deselectItem: PropTypes.func,
   }
 
-  static getDerivedStateFromProps = (props, state) => {
-    if (props.selectedItem.rejectClicked) {
-      return {
-        ...rejectionText,
-      };
-    }
-    return state;
-  }
+  static defaultProps = {
+    message: {},
+    selectedItem: {},
+    deselectItem: () => { },
+    closeModal: () => { },
+  };
 
   constructor(props) {
     super(props);
@@ -63,6 +55,15 @@ class CommentsForm extends Component {
     };
   }
 
+  static getDerivedStateFromProps = (props, state) => {
+    if (props.selectedItem.rejectClicked) {
+      return {
+        ...rejectionText,
+      };
+    }
+    return state;
+  }
+  
   /**
    * @name handleChange
    * @summary handles chnage event for form inputs

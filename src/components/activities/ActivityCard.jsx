@@ -79,6 +79,15 @@ class ActivityCard extends Component {
     wordCount: 50,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActivityChecked: false,
+      statuses: ['pending', 'rejected', 'approved', 'in review'],
+      needButtons: ['pending', 'in review'],
+    };
+  }
+
   /**
    * @name getDerivedStateFromProps
    * @summary Lifecylce methods that updates state of isActivityChecked if activity is checked or not
@@ -89,15 +98,6 @@ class ActivityCard extends Component {
     const { selectedActivities } = nextProps;
     return {
       isActivityChecked: selectedActivities ? selectedActivities.includes(nextProps.id) : false,
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      isActivityChecked: false,
-      statuses: ['pending', 'rejected', 'approved', 'in review'],
-      needButtons: ['pending', 'in review'],
     };
   }
 

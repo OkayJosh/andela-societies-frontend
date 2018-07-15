@@ -13,10 +13,6 @@ import { removeCookies } from '../../helpers/authentication';
  * @extends React.Component
  */
 export default class Header extends Component {
-  static defaultProps = {
-    societyBanner: false,
-    profile: null,
-  };
   /**
    * @name propTypes
    * @type {PropType}
@@ -40,6 +36,12 @@ export default class Header extends Component {
       }),
     }),
   }
+
+  static defaultProps = {
+    societyBanner: false,
+    profile: null,
+  };
+
   constructor(props) {
     super(props);
     this.initialMenuState = {
