@@ -3,6 +3,12 @@ import {
   FETCH_CATEGORIES_REQUEST,
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
+  CREATE_CATEGORY_REQUEST,
+  CREATE_CATEGORY_SUCCESS,
+  CREATE_CATEGORY_FAILURE,
+  DELETE_CATEGORY_REQUEST,
+  DELETE_CATEGORY_SUCCESS,
+  DELETE_CATEGORY_FAILURE,
 } from '../../src/types';
 import categories from '../../src/fixtures/categories';
 import store from '../../src/fixtures/store';
@@ -50,6 +56,93 @@ describe('categoriesReducer', () => {
       error: {},
       categories,
       message: null,
+    });
+  });
+
+  it('should handle DELETE_CATEGORY_REQUEST', () => {
+    expect(categoriesReducer(initialState, {
+      type: DELETE_CATEGORY_REQUEST,
+    })).toEqual({
+      updating: true,
+      error: {},
+      categories: initialState.categories,
+      message: null,
+      requesting: false,
+    });
+  });
+
+  it('should handle DELETE_CATEGORY_FAILURE', () => {
+    expect(categoriesReducer(initialState, {
+      type: DELETE_CATEGORY_FAILURE,
+      error: { error: 404 },
+    })).toEqual({
+      requesting: false,
+      updating: false,
+      error: { error: 404 },
+      categories: initialState.categories,
+      message: null,
+    });
+  });
+
+  it('should handle DELETE_CATEGORY_SUCCESS', () => {
+    initialState.categories = categories;
+    const updatedCategories = initialState.categories.filter(category => (
+      category.id !== categories[0].id
+    ));
+    expect(categoriesReducer(initialState, {
+      type: DELETE_CATEGORY_SUCCESS,
+      id: categories[0].id,
+    })).toEqual({
+      requesting: false,
+      updating: false,
+      error: {},
+      categories: updatedCategories,
+      message: null,
+    });
+  });
+
+  it('should handle CREATE_CATEGORY_REQUEST', () => {
+    expect(categoriesReducer(initialState, {
+      type: CREATE_CATEGORY_REQUEST,
+    })).toEqual({
+      error: {},
+      categories: initialState.categories,
+      message: {
+        type: 'info',
+        text: 'Sending ...',
+      },
+      requesting: false,
+    });
+  });
+
+  it('should handle CREATE_CATEGORY_FAILURE', () => {
+    expect(categoriesReducer(initialState, {
+      type: CREATE_CATEGORY_FAILURE,
+      error: { error: 404 },
+    })).toEqual({
+      requesting: false,
+      error: { error: 404 },
+      categories: initialState.categories,
+      message: {
+        type: 'error',
+        text: 'An error has occurred',
+      },
+    });
+  });
+
+  it('should handle CREATE_CATEGORY_SUCCESS', () => {
+    initialState.categories = [];
+    expect(categoriesReducer(initialState, {
+      type: CREATE_CATEGORY_SUCCESS,
+      category: categories[0],
+    })).toEqual({
+      requesting: false,
+      error: {},
+      categories: [categories[0]],
+      message: {
+        type: 'success',
+        text: 'Category Created Successfully',
+      },
     });
   });
 });
