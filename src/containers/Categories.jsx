@@ -6,8 +6,6 @@ import CategoryCard from '../components/categories/CategoryCard';
 import Page from './Page';
 import PageHeader from '../components/header/PageHeader';
 import LinearLayout from '../containers/LinearLayout';
-import Stats from '../components/sidebar/Stats';
-import stats from '../fixtures/stats';
 
 import { fetchCategories } from '../actions/categoriesActions';
 import { deleteCategory } from '../actions/deleteCategoryActions';
@@ -33,7 +31,6 @@ class Categories extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isSelectAllChecked: false,
       selectedCategories: [],
     };
   }
@@ -46,50 +43,6 @@ class Categories extends Component {
     this.props.deleteCategory(categoryId);
   }
 
-
-  /**
-   * @name handleSelectAllClick
-   * @summary toggles state when select all is checked and updates it with selected categories
-   * @returns {void}
-   */
-  handleSelectAllClick = () => {
-    const { isSelectAllChecked } = this.state;
-    const selectedCategories = this.props.categories.filter(category =>
-      (!isSelectAllChecked && category.id)).map(category => category.id);
-    this.setState({ isSelectAllChecked: !isSelectAllChecked, selectedCategories });
-  }
-
-  /**
-   * @name handleDeselectCategory
-   * @summary updates state with categirues deselected using the checkbox
-   * @param {string} id - id of the category deselected
-   * @returns {void}
-   */
-  handleDeselectCategory = (id) => {
-    const { selectedCategories } = this.state;
-    const selected = selectedCategories.filter(categoryId => categoryId !== id);
-    this.setState({ selectedCategories: selected });
-  }
-
-  /**
-   * @name handleDeleteAllClick
-   * @summary handles calling the action to delete selected categories
-   * @returns void
-   */
-  handleDeleteAllClick = () => {
-    const { selectedCategories } = this.state;
-    if (!selectedCategories.length) {
-      this.setState({
-        message: ({
-          text: 'Please Select a Category to Delete',
-          type: 'error',
-        }),
-      });
-    }
-
-    this.props.deleteCategory(selectedCategories);
-  };
-
   /**
    * @name renderLayout
    * @summary renders different layout depending on role
@@ -97,7 +50,6 @@ class Categories extends Component {
    */
   renderLayout() {
     const {
-      isSelectAllChecked,
       selectedCategories,
     } = this.state;
     const { categories } = this.props;
@@ -119,7 +71,6 @@ class Categories extends Component {
               value={value}
               page={page}
               handleClick={this.handleClick}
-              isSelectAllChecked={isSelectAllChecked}
               selectedCategories={selectedCategories}
               handleDeselectCategory={this.handleDeselectCategory}
               wordCount={70}
@@ -143,7 +94,6 @@ class Categories extends Component {
       snackBarMessage = <SnackBar message={message} />;
     }
     const hideFilter = true;
-    const showSelectAllDeleteBtn = true;
 
     return (
       <Page>
@@ -152,9 +102,7 @@ class Categories extends Component {
             <PageHeader
               title='Categories'
               hideFilter={hideFilter}
-              showSelectAllDeleteBtn={showSelectAllDeleteBtn}
               handleSelectAllClick={this.handleSelectAllClick}
-              handleApproveAllClick={this.handleDeleteAllClick}
             />
             <div className='categories'>
               {
@@ -166,11 +114,6 @@ class Categories extends Component {
             </div>
           </div>
         </div>
-        <aside className='sideContent'>
-          <Stats
-            stats={stats}
-          />
-        </aside>
         { snackBarMessage }
       </Page>
     );

@@ -25,28 +25,22 @@ class CategoryCard extends Component {
     name: PropType.string,
     description: PropType.string,
     value: PropType.number,
-    page: PropType.string,
     handleClick: PropType.func,
     id: PropType.string.isRequired,
     wordCount: PropType.number,
-    handleDeselectCategory: PropType.func,
   };
 
   static defaultProps = {
     name: '',
     description: '',
     value: 0,
-    page: '',
     handleClick: () => { },
     wordCount: 20,
-    handleDeselectCategory: () => {},
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      isCategoryChecked: false,
-    };
+    this.state = {};
   }
 
   /**
@@ -61,32 +55,6 @@ class CategoryCard extends Component {
       isCategoryChecked: selectedCategories ? selectedCategories.includes(nextProps.id) : false,
     };
   }
-
-  /**
-   * @name handleCategoryChecked
-   * @summary toggles state when checkbox is clicked
-   * @returns {void}
-   */
-  handleCategoryChecked = () => {
-    const { id, handleDeselectCategory } = this.props;
-    const { isCategoryChecked } = this.state;
-    this.setState({ isCategoryChecked: !isCategoryChecked }, () => {
-      if (!this.state.isCategoryChecked) handleDeselectCategory(id);
-    });
-  }
-
-  renderCheckbox = () => (
-    (
-      <input
-        type='checkbox'
-        name='checkbox'
-        value={this.props.id}
-        className='category__checkbox'
-        checked={this.state.isCategoryChecked}
-        onChange={this.handleCategoryChecked}
-      />
-    )
-  );
 
   renderDeleteButton() {
     return (
@@ -119,7 +87,6 @@ class CategoryCard extends Component {
     const {
       name,
       description,
-      page,
       wordCount,
     } = this.props;
 
@@ -130,7 +97,6 @@ class CategoryCard extends Component {
             <div>
               <span className='category__category'>{name}</span>
             </div>
-            {page === '/u/categories' && this.renderCheckbox()}
           </div>
           <div className='category__content'>
             <TruncateDescription description={description} wordCount={wordCount} />

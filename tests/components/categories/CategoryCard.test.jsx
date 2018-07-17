@@ -33,15 +33,4 @@ describe('<CategoryCard />', () => {
   it('should render delete button on categories page', () => {
     expect(shallowWrapper.find('.deleteCategory__button').length).toBe(1);
   });
-
-  it('should render check box on categories page cards', () => {
-    expect(shallowWrapper.find('.category__checkbox').length).toBe(1);
-  });
-
-  it('should change state when a checkbox of a category is clicked', () => {
-    shallowWrapper.setState({ isCategoryChecked: true });
-    const checkbox = shallowWrapper.find('.category__checkbox');
-    checkbox.simulate('change');
-    expect(shallowWrapper.state().isCategoryChecked).toBe(false);
-  });
 });
