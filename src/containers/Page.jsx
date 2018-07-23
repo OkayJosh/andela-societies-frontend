@@ -138,7 +138,7 @@ class Page extends Component {
     this.setState({ showModal: false });
   }
 
-  renderFAB = () => {
+  renderFloatingButton = () => {
     const { profile, location } = this.props;
     const userRoles = Object.keys(profile.roles);
     let FAB;
@@ -228,7 +228,7 @@ class Page extends Component {
           </div>
         </main>
         {this.renderModal()}
-        {this.renderFAB()}
+        {this.renderFloatingButton()}
       </Fragment>
     );
   }

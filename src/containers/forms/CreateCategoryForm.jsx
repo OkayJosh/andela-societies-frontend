@@ -71,7 +71,12 @@ class CreateCategoryForm extends Component {
 
   handleAddEvent = (event) => {
     event.preventDefault();
-    const { name, description, value } = this.state;
+    const {
+      name,
+      description,
+      value,
+      errors,
+    } = this.state;
     const category = {
       name,
       description,
@@ -80,7 +85,7 @@ class CreateCategoryForm extends Component {
     this.setState({
       errors: validateFormFields(category),
     }, () => {
-      if (this.state.errors.length === 0) {
+      if (errors.length === 0) {
         this.props.createCategory(category);
       }
     });

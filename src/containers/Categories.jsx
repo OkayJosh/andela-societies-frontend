@@ -94,6 +94,10 @@ class Categories extends Component {
       snackBarMessage = <SnackBar message={message} />;
     }
     const hideFilter = true;
+    const categoriesHTML = requesting ?
+      <h3 className='loader'>Loading... </h3>
+      :
+      this.renderLayout();
 
     return (
       <Page>
@@ -106,10 +110,7 @@ class Categories extends Component {
             />
             <div className='categories'>
               {
-                requesting ?
-                  <h3 className='loader'>Loading... </h3>
-                  :
-                  this.renderLayout()
+                categoriesHTML
               }
             </div>
           </div>
